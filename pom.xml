@@ -950,11 +950,6 @@
 			<url>http://maven.i2cat.net:8081/artifactory/libs-release</url>
 		</repository>
 		<repository>
-			<id>i2cat libs-snapshot-local</id>
-			<name>maven.i2cat.net-snapshots</name>
-			<url>http://maven.i2cat.net:8081/artifactory/libs-snapshot-local</url>
-		</repository>
-		<repository>
 			<id>springsource-external</id>
 			<name>SpringSource Enterprise Bundle Repository - External Bundle
 				Releases</name>
@@ -996,13 +991,6 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<id>snapshots</id>
-			<url>http://maven.i2cat.net:8081/artifactory/plugins-snapshot</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-		<pluginRepository>
 			<id>ops4j.releases</id>
 			<url>http://repository.ops4j.org/maven2</url>
 			<snapshots>
@@ -1036,12 +1024,6 @@
 			<name>i2cat maven repository</name>
 			<url>http://maven.i2cat.net:8081/artifactory/libs-release</url>
 		</repository>
-		<snapshotRepository>
-			<uniqueVersion>true</uniqueVersion>
-			<id>i2cat-snapshot</id>
-			<name>libs-snapshot-local</name>
-			<url>http://maven.i2cat.net:8081/artifactory/libs-snapshot-local</url>
-		</snapshotRepository>
 		<site>
 			<id>github</id>
 			<name>opennaas</name>
