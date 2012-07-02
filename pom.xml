@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.opennaas</groupId>
 	<artifactId>opennaas</artifactId>
-	<version>0.8</version>
-	<name>OpenNaaS (OSGi project)</name>
+	<version>0.11-SNAPSHOT</version>
+	<name>OpenNaaS</name>
 	<packaging>pom</packaging>
 
 	<url>http://www.mantychore.eu/</url>
@@ -43,6 +43,7 @@
 		<commons.io.version>1.4</commons.io.version>
 		<commons.jxpath.version>1.2_1-fuse</commons.jxpath.version>
 		<commons.lang.version>2.4_4</commons.lang.version>
+		<commons.net.version>1.4.1_3</commons.net.version>
 		<commons.pool.version>1.5.4</commons.pool.version>
 		<cxf.version>2.4.3-fuse-01-02</cxf.version>
 		<easymock.version>3.1</easymock.version>
@@ -53,6 +54,7 @@
 		<geronimo.wsmetadata.version>1.1.2</geronimo.wsmetadata.version>
 		<geronimo.servlet.version>1.1.2</geronimo.servlet.version>
 		<guava.version>10.0.1</guava.version>
+		<jodatime.version>2.1</jodatime.version>
 		<hibernate.version>3.6.9.Final</hibernate.version>
 		<hibernate.jpa-api.version>2.0-cr-1</hibernate.jpa-api.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
@@ -123,6 +125,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.bod.autobahn</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
 				<artifactId>org.opennaas.core.tests-mockprofile</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -134,6 +141,21 @@
 			<dependency>
 				<groupId>org.opennaas</groupId>
 				<artifactId>org.opennaas.core.features</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.transports.sockets</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.protocols.cli</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.protocols.tl1</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -223,12 +245,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.opennaas</groupId>
-				<artifactId>org.opennaas.extensions.nexus.tests.helper</artifactId>
-				<version>${project.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.opennaas</groupId>
 				<artifactId>org.opennaas.extensions.network.capability.ospf</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -252,7 +268,31 @@
 				<artifactId>org.opennaas.extensions.router.capability.staticroute</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.itests.helpers</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.sampleresource</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.macbridge.capability.vlanawarebridge</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.macbridge.model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opennaas</groupId>
+				<artifactId>org.opennaas.extensions.macbridge.ios.resource</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- Netconf4j -->
 			<dependency>
 				<groupId>net.i2cat.netconf</groupId>
@@ -320,6 +360,11 @@
 				<groupId>org.apache.servicemix.bundles</groupId>
 				<artifactId>org.apache.servicemix.bundles.commons-dbcp</artifactId>
 				<version>${commons.dbcp.version}</version>
+			</dependency>
+			<dependency>
+  				<groupId>org.apache.servicemix.bundles</groupId>
+  				<artifactId>org.apache.servicemix.bundles.commons-net</artifactId>
+ 				<version>${commons.net.version}</version>
 			</dependency>
 			<!-- OSGI API -->
 			<dependency>
@@ -690,6 +735,11 @@
 				<artifactId>guava-osgi</artifactId>
 				<version>${guava.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${jodatime.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -697,9 +747,9 @@
         <module>core</module>
 		<module>extensions</module>
 		<module>platform</module>
-		<module>tests</module>
+		<module>itests</module>
+<!-- 		<module>web</module> -->
 	</modules>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -1020,9 +1070,9 @@
 	<distributionManagement>
 		<repository>
 			<uniqueVersion>false</uniqueVersion>
-			<id>i2cat</id>
-			<name>i2cat maven repository</name>
-			<url>http://maven.i2cat.net:8081/artifactory/libs-release</url>
+			<id>maven.i2cat.net</id>
+			<name>>maven.i2cat.net-releases</name>
+			<url>http://maven.i2cat.net:8081/artifactory/libs-release-local</url>
 		</repository>
 		<site>
 			<id>github</id>

@@ -5,11 +5,11 @@
 	<parent>
 		<artifactId>opennaas</artifactId>
 		<groupId>org.opennaas</groupId>
-		<version>0.8</version>
+		<version>0.11-SNAPSHOT</version>
 	</parent>
 
 	<packaging>pom</packaging>
-	<name>OpenNaaS platform</name>
+	<name>OpenNaaS :: Platform</name>
 	<artifactId>platform</artifactId>
 
 	<properties>
@@ -46,11 +46,27 @@
 		</dependency>
 		<dependency>
 			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.bod.autobahn</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.core.tests-mockprofile</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.core.features</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.transports.sockets</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.protocols.cli</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.protocols.tl1</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.opennaas</groupId>
@@ -71,7 +87,6 @@
 		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.roadm.repository</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.wonesys</groupId>
@@ -123,10 +138,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.opennaas</groupId>
-			<artifactId>org.opennaas.extensions.nexus.tests.helper</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.network.capability.ospf</artifactId>
 		</dependency>
 		<dependency>
@@ -146,9 +157,19 @@
 			<artifactId>org.opennaas.extensions.router.capability.staticroute</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.sampleresource</artifactId>
+		</dependency>				
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.itests.helpers</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.apache.servicemix</groupId>
 			<artifactId>apache-servicemix</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -201,7 +222,7 @@
 							<addTransitiveFeatures>true</addTransitiveFeatures>
 							<features>
 								<feature>opennaas</feature>
-								<feature>nexus-tests-helper</feature>
+								<feature>itests-helpers</feature>
 								<feature>nexus-testprofile</feature>
 							</features>
 							<repository>target/system</repository>
