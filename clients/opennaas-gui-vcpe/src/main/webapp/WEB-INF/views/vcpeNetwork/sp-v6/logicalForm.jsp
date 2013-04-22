@@ -16,8 +16,8 @@
 <c:set var="UP2_INTERFACE_PEER"  value='<%= SPTemplateConstants.UP2_INTERFACE_PEER %>' />
 
 <h2 id="vcpe_title"><spring:message code="logical.sp.v6.title"/></h2>
+<div id="spLogicalFormIPV6" >
 <div id="spLogicalForm" >
-
 	<form:form modelAttribute="logicalInfrastructure" action="${action}" method="post">
 		<form:hidden path="id" />
 		<form:hidden path="templateType" />	
@@ -736,4 +736,5 @@
 			<input id="submitButton" class="button" type="submit" value="<spring:message code="buttons.update"/>" />
 		</c:if>
 	</form:form>
+</div>
 </div>

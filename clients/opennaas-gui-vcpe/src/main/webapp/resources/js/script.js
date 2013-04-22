@@ -1159,6 +1159,7 @@ function resizeWindow(e) {
 var validIPAddressRegExp = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
 var validIPAddressSubnetMaskRegExp = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\/(\\d{1}|[0-2]{1}\\d{1}|3[0-2])$");
 
+
 $(document).ready(function() {
 	// only apply when create view or update IPs view are loaded
 	if($("#spLogicalForm").length || $("#updateIPs").length || $("#mpLogicalForm").length) {
@@ -1363,5 +1364,26 @@ $(document).ready(function() {
 		$('#clientNetwork\\.networkInterface\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
 
 		$('#name').rules("add", { required: true });
+	}
+});
+
+/**
+ * Pop-up for ipv6
+ */
+$(document).ready(function () {
+	if($("#spLogicalFormIPV6").length) {
+		$('#logicalRouterMaster\\.interfaces2\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces2\\.ipAddress').popBox();
+		$('#routerCore\\.interfaces3\\.ipAddress').popBox();
+		$('#routerCore\\.interfaces4\\.ipAddress').popBox();
+		$('#nocIpRange').popBox();
+		$('#bgp\\.clientPrefixes').popBox();
+		$('#logicalRouterMaster\\.interfaces3\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces3\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces1\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces0\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces0\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces1\\.ipAddress').popBox();
+		$('#clientIpRange').popBox();		
 	}
 });
