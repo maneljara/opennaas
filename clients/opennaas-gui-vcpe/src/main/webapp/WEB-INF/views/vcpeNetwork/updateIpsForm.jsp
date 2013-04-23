@@ -11,7 +11,9 @@
 <spring:message  code="message.error.ip.notavailable" var="ipUsed"/>
 <spring:message  code="message.error.vlan.notavailable" var="vlanUsed"/>
 
-
+<c:if test="${logicalInfrastructure.templateType == 'sp_v6_vcpe'}">			
+<div id="spLogicalFormIPV6" >
+</c:if>
 <div id="updateIPs">
 	<form:form modelAttribute="logicalInfrastructure" action="updateIps" method="post">
 		<form:hidden path="id" />
@@ -295,3 +297,6 @@
 		<input id="updateIpButton" class="button" type="submit" value="<spring:message code="buttons.update"/>" />
 	</form:form>
 </div>
+<c:if test="${logicalInfrastructure.templateType == 'sp_v6_vcpe'}">			
+</div>
+</c:if>

@@ -668,7 +668,8 @@ $(function() {
 	$("#selectable").selectable();
 	$("#selectTemplateButton").click(function(event) {	
 		if ($('#selectable .ui-selected').attr('id') != undefined) {
-			if ($('#selectable .ui-selected').attr('id') == 'sp_vcpe') {
+			if ($('#selectable .ui-selected').attr('id') == 'sp_vcpe' 
+				|| $('#selectable .ui-selected').attr('id') == 'sp_v6_vcpe') {
 				url = "/opennaas-vcpe/secure/noc/vcpeNetwork/singleProvider/physical?templateType=" + $('#selectable .ui-selected').attr('id');
 			} else {
 				url = "/opennaas-vcpe/secure/noc/vcpeNetwork/multipleProvider/physical?templateType=" + $('#selectable .ui-selected').attr('id');				
@@ -1158,6 +1159,7 @@ function resizeWindow(e) {
 var validIPAddressRegExp = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
 var validIPAddressSubnetMaskRegExp = new RegExp("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\/(\\d{1}|[0-2]{1}\\d{1}|3[0-2])$");
 
+
 $(document).ready(function() {
 	// only apply when create view or update IPs view are loaded
 	if($("#spLogicalForm").length || $("#updateIPs").length || $("#mpLogicalForm").length) {
@@ -1228,27 +1230,8 @@ $(document).ready(function() {
 	}
 	
 	// create sp view form validation rules
-	if($("#spLogicalForm").length) {
-		// ============ begin validation rules ==================== //	
-		$('#logicalRouterMaster\\.interfaces2\\.name').rules("add", { required: true });
-		$('#logicalRouterMaster\\.interfaces2\\.port').rules("add", { required: true, min: 0 });
-		$('#logicalRouterMaster\\.interfaces2\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
-		$('#logicalRouterMaster\\.interfaces2\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
-		
-		$('#logicalRouterBackup\\.interfaces2\\.name').rules("add", { required: true });
-		$('#logicalRouterBackup\\.interfaces2\\.port').rules("add", { required: true, min: 0 });
-		$('#logicalRouterBackup\\.interfaces2\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
-		$('#logicalRouterBackup\\.interfaces2\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
-		
-		$('#bgp\\.clientASNumber').rules("add", { required: true });
-		$('#bgp\\.nocASNumber').rules("add", { required: true, min: 0, max: 4294967295 });
-		$('#bgp\\.clientPrefixes').rules("add", { required: true });
-	
-		$('#logicalRouterMaster\\.interfaces1\\.name').rules("add", { required: true });
-		$('#logicalRouterMaster\\.interfaces1\\.port').rules("add", { required: true, min: 0 });
-		$('#logicalRouterMaster\\.interfaces1\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
-		$('#logicalRouterMaster\\.interfaces1\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
-		
+	if($("#spLogicalForm").length && !$("#spLogicalFormIPV6").length) {		
+		// ============ begin validation rules ==================== //
 		$('#logicalRouterMaster\\.interfaces0\\.name').rules("add", { required: true });
 		$('#logicalRouterMaster\\.interfaces0\\.port').rules("add", { required: true, min: 0 });
 		$('#logicalRouterMaster\\.interfaces0\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
@@ -1258,12 +1241,51 @@ $(document).ready(function() {
 		$('#logicalRouterBackup\\.interfaces0\\.port').rules("add", { required: true, min: 0 });
 		$('#logicalRouterBackup\\.interfaces0\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
 		$('#logicalRouterBackup\\.interfaces0\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
-		
+
+		$('#logicalRouterMaster\\.interfaces1\\.name').rules("add", { required: true });
+		$('#logicalRouterMaster\\.interfaces1\\.port').rules("add", { required: true, min: 0 });
+		$('#logicalRouterMaster\\.interfaces1\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#logicalRouterMaster\\.interfaces1\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+				
 		$('#logicalRouterBackup\\.interfaces1\\.name').rules("add", { required: true });
 		$('#logicalRouterBackup\\.interfaces1\\.port').rules("add", { required: true, min: 0 });
 		$('#logicalRouterBackup\\.interfaces1\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
 		$('#logicalRouterBackup\\.interfaces1\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
 		
+		$('#logicalRouterMaster\\.interfaces2\\.name').rules("add", { required: true });
+		$('#logicalRouterMaster\\.interfaces2\\.port').rules("add", { required: true, min: 0 });
+		$('#logicalRouterMaster\\.interfaces2\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#logicalRouterMaster\\.interfaces2\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+		
+		$('#logicalRouterBackup\\.interfaces2\\.name').rules("add", { required: true });
+		$('#logicalRouterBackup\\.interfaces2\\.port').rules("add", { required: true, min: 0 });
+		$('#logicalRouterBackup\\.interfaces2\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#logicalRouterBackup\\.interfaces2\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+
+		$('#logicalRouterMaster\\.interfaces3\\.name').rules("add", { required: true });
+		$('#logicalRouterMaster\\.interfaces3\\.port').rules("add", { required: true, min: 0 });
+		$('#logicalRouterMaster\\.interfaces3\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#logicalRouterMaster\\.interfaces3\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+		
+		$('#logicalRouterBackup\\.interfaces3\\.name').rules("add", { required: true });
+		$('#logicalRouterBackup\\.interfaces3\\.port').rules("add", { required: true, min: 0 });
+		$('#logicalRouterBackup\\.interfaces3\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#logicalRouterBackup\\.interfaces3\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+
+		$('#routerCore\\.interfaces3\\.name').rules("add", { required: true });
+		$('#routerCore\\.interfaces3\\.port').rules("add", { required: true, min: 0 });
+		$('#routerCore\\.interfaces3\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#routerCore\\.interfaces3\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+
+		$('#routerCore\\.interfaces4\\.name').rules("add", { required: true });
+		$('#routerCore\\.interfaces4\\.port').rules("add", { required: true, min: 0 });
+		$('#routerCore\\.interfaces4\\.ipAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#routerCore\\.interfaces4\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
+		
+		$('#bgp\\.clientASNumber').rules("add", { required: true });
+		$('#bgp\\.nocASNumber').rules("add", { required: true, min: 0, max: 4294967295 });
+		$('#bgp\\.clientPrefixes').rules("add", {custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+			
 		$('#bod\\.ifaceClient\\.name').rules("add", { required: true, maxlength: 25 });
 		$('#bod\\.ifaceClient\\.port').rules("add", { required: true, min: 0, max: 4094 });
 		$('#bod\\.ifaceClient\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
@@ -1272,11 +1294,10 @@ $(document).ready(function() {
 		$('#bod\\.ifaceClientBackup\\.port').rules("add", { required: true, min: 0 });
 		$('#bod\\.ifaceClientBackup\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
 		
-		$('#vrrp\\.virtualIPAddress').rules("add", { custom_regex: validIPAddressRegExp, required: true });
-		
-		$('#name').rules("add", { required: true });
-		$('#clientIpRange').rules("add", { required: true });
-		$('#nocIpRange').rules("add", { required: true });
+		$('#clientIpRange').rules("add", {custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#nocIpRange').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#vrrp\\.virtualIPAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+	
 		// ============ end validation rules ==================== //
 	}
 	
@@ -1362,5 +1383,27 @@ $(document).ready(function() {
 		$('#clientNetwork\\.networkInterface\\.vlan').rules("add", { required: true, min: 0, max: 4094 });
 
 		$('#name').rules("add", { required: true });
+	}
+});
+
+/**
+ * Pop-up for ipv6
+ */
+$(document).ready(function () {
+	if($("#spLogicalFormIPV6").length) {
+		$('#routerCore\\.interfaces3\\.ipAddress').popBox();
+		$('#routerCore\\.interfaces4\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces0\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces0\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces1\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces1\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces2\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces2\\.ipAddress').popBox();
+		$('#logicalRouterMaster\\.interfaces3\\.ipAddress').popBox();
+		$('#logicalRouterBackup\\.interfaces3\\.ipAddress').popBox();
+		$('#clientIpRange').popBox();
+		$('#nocIpRange').popBox();
+		$('#bgp\\.clientPrefixes').popBox();
+		$('#vrrp\\virtualIPAddress').popBox();
 	}
 });

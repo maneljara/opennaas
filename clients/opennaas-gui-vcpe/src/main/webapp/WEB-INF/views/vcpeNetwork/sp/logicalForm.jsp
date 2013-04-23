@@ -15,9 +15,17 @@
 <c:set var="UP1_INTERFACE_PEER"  value='<%= SPTemplateConstants.UP1_INTERFACE_PEER %>' />
 <c:set var="UP2_INTERFACE_PEER"  value='<%= SPTemplateConstants.UP2_INTERFACE_PEER %>' />
 
-<h2 id="vcpe_title"><spring:message code="logical.sp.title"/></h2>
-<div id="spLogicalForm" >
 
+<c:if test="${logicalInfrastructure.templateType == 'sp_vcpe'}">
+	<h2 id="vcpe_title"><spring:message code="logical.sp.title"/></h2>
+</c:if>
+			
+<c:if test="${logicalInfrastructure.templateType == 'sp_v6_vcpe'}">
+	<h2 id="vcpe_title"><spring:message code="logical.sp.v6.title"/></h2>
+	<div id="spLogicalFormIPV6" >
+</c:if>
+
+<div id="spLogicalForm" >
 	<form:form modelAttribute="logicalInfrastructure" action="${action}" method="post">
 		<form:hidden path="id" />
 		<form:hidden path="templateType" />	
@@ -737,3 +745,6 @@
 		</c:if>
 	</form:form>
 </div>
+<c:if test="${logicalInfrastructure.templateType == 'sp_v6_vcpe'}">
+</div>
+</c:if>
