@@ -14,6 +14,9 @@
 			<c:when test="${sessionScope.vcpeNetworkList[vs.index].templateType == 'sp_vcpe'}">				
 				<c:set var="url" value="/secure/noc/vcpeNetwork/singleProvider" />
 			</c:when>
+			<c:when test="${sessionScope.vcpeNetworkList[vs.index].templateType == 'sp_v6_vcpe'}">				
+				<c:set var="url" value="/secure/noc/vcpeNetwork/singleProvider" />
+			</c:when>
 			<c:otherwise>
 				<c:set var="url" value="/secure/noc/vcpeNetwork/multipleProvider" />
 			</c:otherwise>
@@ -36,6 +39,13 @@
 				
 				<sec:authorize access="hasRole('ROLE_CLIENT')">
 					<c:if test="${sessionScope.vcpeNetworkList[vs.index].templateType == 'sp_vcpe'}">				
+						<li>
+							<a href="<c:url value="${url}/updateIpsForm?vcpeNetworkId=${sessionScope.vcpeNetworkList[vs.index].id}" />">
+								<spring:message code="menu.update" />
+							</a>
+						</li>
+					</c:if>
+					<c:if test="${sessionScope.vcpeNetworkList[vs.index].templateType == 'sp_v6_vcpe'}">				
 						<li>
 							<a href="<c:url value="${url}/updateIpsForm?vcpeNetworkId=${sessionScope.vcpeNetworkList[vs.index].id}" />">
 								<spring:message code="menu.update" />
