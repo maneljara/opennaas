@@ -9,11 +9,11 @@
 
 <sec:authorize access="hasRole('ROLE_NOC')">
 
-	<c:if test="${logicalInfrastructure.templateType == 'sp_vcpe'}">
+	<c:if test="${physicalInfrastructure.templateType == 'sp_vcpe'}">
 		<h2 id="vcpe_title"><spring:message code="physical.sp.title"/></h2>
 	</c:if>
-				
-	<c:if test="${logicalInfrastructure.templateType == 'sp_v6_vcpe'}">
+
+	<c:if test="${physicalInfrastructure.templateType == 'sp_v6_vcpe'}">
 		<h2 id="vcpe_title"><spring:message code="physical.sp.v6.title"/></h2>
 	</c:if>
 
