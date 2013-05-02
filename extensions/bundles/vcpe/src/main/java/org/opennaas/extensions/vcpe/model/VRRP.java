@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class VRRP {
 
 	private String		virtualIPAddress;
+	private String		virtualIPv6Address;
 	private Integer		group;
 	private Integer		priorityMaster;
 	private Integer		priorityBackup;
@@ -41,6 +42,21 @@ public class VRRP {
 	 */
 	public void setVirtualIPAddress(String virtualIPAddress) {
 		this.virtualIPAddress = virtualIPAddress;
+	}
+
+	/**
+	 * @return the virtualIPv6Address
+	 */
+	public String getVirtualIPv6Address() {
+		return virtualIPv6Address;
+	}
+
+	/**
+	 * @param virtualIPv6Address
+	 *            the virtualIPv6Address to set
+	 */
+	public void setVirtualIPv6Address(String virtualIPv6Address) {
+		this.virtualIPv6Address = virtualIPv6Address;
 	}
 
 	/**

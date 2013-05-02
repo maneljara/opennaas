@@ -73,9 +73,9 @@ public class SPV6TemplateSuggestor {
 
 		// Logical elements
 		propertiesNameMap.put(SPV6TemplateConstants.UP1_INTERFACE_PEER, "vcpenetwork.logicalrouter1.interface.up.other"); // matching
-																														// CORE_PHY_INTERFACE_MASTER
+																															// CORE_PHY_INTERFACE_MASTER
 		propertiesNameMap.put(SPV6TemplateConstants.UP2_INTERFACE_PEER, "vcpenetwork.logicalrouter2.interface.up.other"); // matching
-																														// CORE_PHY_INTERFACE_BKP
+																															// CORE_PHY_INTERFACE_BKP
 		propertiesNameMap.put(SPV6TemplateConstants.CORE_LO_INTERFACE, "vcpenetwork.routercore.interface.lo");
 
 		propertiesNameMap.put(SPV6TemplateConstants.VCPE1_ROUTER, "vcpenetwork.logicalrouter1");
@@ -228,6 +228,7 @@ public class SPV6TemplateSuggestor {
 		model.getVrrp().setPriorityMaster(masterVRRPPriority);
 		model.getVrrp().setPriorityBackup(backupVRRPPriority);
 		model.getVrrp().setVirtualIPAddress(props.getProperty("vcpenetwork.vrrp.virtualIPAddress").trim());
+		model.getVrrp().setVirtualIPv6Address(props.getProperty("vcpenetwork.vrrp.virtualIPv6Address").trim());
 
 		// BGP
 		model.getBgp().setClientASNumber(props.getProperty("vcpenetwork.bgp.clientASNumber").trim());
@@ -235,10 +236,16 @@ public class SPV6TemplateSuggestor {
 		List<String> clientPrefixes = new ArrayList<String>();
 		clientPrefixes.add(props.getProperty("vcpenetwork.bgp.clientPrefixes").trim());
 		model.getBgp().setCustomerPrefixes(clientPrefixes);
+		List<String> clientIPv6Prefixes = new ArrayList<String>();
+		clientIPv6Prefixes.add(props.getProperty("vcpenetwork.bgp.clientIPv6Prefixes").trim());
+		model.getBgp().setCustomerIPv6Prefixes(clientIPv6Prefixes);
 
 		// VCPE
 		model.setClientIpRange(props.getProperty("vcpenetwork.client.iprange").trim());
+		model.setClientIpv6Range(props.getProperty("vcpenetwork.client.ipv6range").trim());
+
 		model.setNocIpRange(props.getProperty("vcpenetwork.noc.iprange").trim());
+		model.setNocIpv6Range(props.getProperty("vcpenetwork.noc.ipv6range").trim());
 
 		return model;
 	}
@@ -259,10 +266,15 @@ public class SPV6TemplateSuggestor {
 		if (props.getProperty(propertiesName + ".ipaddress") != null)
 			ipAddress = props.getProperty(propertiesName + ".ipaddress").trim();
 
+		String ipv6Address = null;
+		if (props.getProperty(propertiesName + ".ipv6address") != null)
+			ipv6Address = props.getProperty(propertiesName + ".ipv6address").trim();
+
 		return VCPENetworkModelHelper.updateInterface(iface,
 				props.getProperty(propertiesName + ".name").trim() + "." + port,
 				vlan,
 				ipAddress,
+				ipv6Address,
 				props.getProperty(propertiesName + ".name").trim(),
 				port);
 	}

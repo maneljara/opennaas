@@ -103,7 +103,9 @@ public class VCPEBeanUtils {
 		modelOut.setId(modelIn.getId());
 		modelOut.setName(modelIn.getName());
 		modelOut.setClientIpRange(modelIn.getClientIpRange());
+		modelOut.setClientIpv6Range(modelIn.getClientIpv6Range());
 		modelOut.setNocIpRange(modelIn.getNocIpRange());
+		modelOut.setNocIpv6Range(modelIn.getNocIpv6Range());
 		modelOut.setTemplateType(modelIn.getTemplateType());
 
 		// Logical Routers
@@ -260,6 +262,7 @@ public class VCPEBeanUtils {
 		outIface.setTemplateName(interfaceIn.getTemplateName());
 		outIface.setPort(String.valueOf(interfaceIn.getPort()));
 		outIface.setIpAddress(interfaceIn.getIpAddress());
+		outIface.setIpv6Address(interfaceIn.getIpv6Address());
 		outIface.setVlan((int) interfaceIn.getVlan());
 
 		String templateName = interfaceIn.getTemplateName();
@@ -386,9 +389,16 @@ public class VCPEBeanUtils {
 		if (bgpIn != null) {
 			bgpOut.setClientASNumber(bgpIn.getClientASNumber());
 			bgpOut.setNocASNumber(bgpIn.getNocASNumber());
-			List<String> clientPrefixes = new ArrayList<String>();
-			clientPrefixes.addAll(bgpIn.getCustomerPrefixes());
-			bgpOut.setClientPrefixes(clientPrefixes);
+			if (bgpIn.getCustomerPrefixes() != null) {
+				List<String> clientPrefixes = new ArrayList<String>();
+				clientPrefixes.addAll(bgpIn.getCustomerPrefixes());
+				bgpOut.setClientPrefixes(clientPrefixes);
+			}
+			if (bgpIn.getCustomerIPv6Prefixes() != null) {
+				List<String> clientIpv6Prefixes = new ArrayList<String>();
+				clientIpv6Prefixes.addAll(bgpIn.getCustomerIPv6Prefixes());
+				bgpOut.setClientIpv6Prefixes(clientIpv6Prefixes);
+			}
 		}
 		return bgpOut;
 	}
@@ -403,6 +413,7 @@ public class VCPEBeanUtils {
 		VRRP vrrpOut = new VRRP();
 		if (vrrpIn != null) {
 			vrrpOut.setVirtualIPAddress(vrrpIn.getVirtualIPAddress());
+			vrrpOut.setVirtualIPv6Address(vrrpIn.getVirtualIPv6Address());
 			vrrpOut.setPriorityMaster(vrrpIn.getPriorityMaster());
 			vrrpOut.setPriorityBackup(vrrpIn.getPriorityBackup());
 			vrrpOut.setGroup(vrrpIn.getGroup());

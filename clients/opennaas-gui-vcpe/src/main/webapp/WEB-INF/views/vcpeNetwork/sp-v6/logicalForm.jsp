@@ -15,8 +15,9 @@
 <c:set var="UP1_INTERFACE_PEER"  value='<%= SPTemplateConstants.UP1_INTERFACE_PEER %>' />
 <c:set var="UP2_INTERFACE_PEER"  value='<%= SPTemplateConstants.UP2_INTERFACE_PEER %>' />
 
-<h2 id="vcpe_title"><spring:message code="logical.sp.title"/></h2>
-	
+<h2 id="vcpe_title"><spring:message code="logical.sp.v6.title"/></h2>
+<div id="spLogicalFormIPV6" >
+
 <div id="spLogicalForm" >
 	<form:form modelAttribute="logicalInfrastructure" action="${action}" method="post">
 		<form:hidden path="id" />
@@ -66,6 +67,12 @@
 									<form:input path="routerCore.interfaces[${vs.index}].ipAddress" size="18"  />
 									<form:errors path="routerCore.interfaces[${vs.index}].ipAddress" size="18" />
 									<br>
+									<form:label for="routerCore.interfaces[${vs.index}].ipv6Address" path="routerCore.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+										<spring:message code="interface.ipv6Address" />
+									</form:label>
+									<form:input path="routerCore.interfaces[${vs.index}].ipv6Address" size="18"  />
+									<form:errors path="routerCore.interfaces[${vs.index}].ipv6Address" size="18" />
+									<br>
 									<form:label for="routerCore.interfaces[${vs.index}].vlan" path="routerCore.interfaces[${vs.index}].vlan" cssErrorClass="error">
 										<spring:message code="interface.vlan" />
 									</form:label>
@@ -84,6 +91,14 @@
 						<form:input path="nocIpRange" size="20" />
 						<br>
 						<form:errors path="nocIpRange" />
+					</div>
+					<form:label for="nocIpv6Range" path="nocIpv6Range" cssErrorClass="error">
+						<spring:message code="vcpenetwork.nocIpv6Range" />
+					</form:label>
+					<div class="ui-widget-content config_content">			
+						<form:input path="nocIpv6Range" size="20" />
+						<br>
+						<form:errors path="nocIpv6Range" />
 					</div>
 				</div>
 				<div class="field">
@@ -109,6 +124,12 @@
 									</form:label>
 									<form:input path="routerCore.interfaces[${vs.index}].ipAddress" size="18"  />
 									<form:errors path="routerCore.interfaces[${vs.index}].ipAddress" size="18" />
+									<br>
+									<form:label for="routerCore.interfaces[${vs.index}].ipv6Address" path="routerCore.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+										<spring:message code="interface.ipAddress" />
+									</form:label>
+									<form:input path="routerCore.interfaces[${vs.index}].ipv6Address" size="18"  />
+									<form:errors path="routerCore.interfaces[${vs.index}].ipv6Address" size="18" />
 									<br>
 									<form:label for="routerCore.interfaces[${vs.index}].vlan" path="routerCore.interfaces[${vs.index}].vlan" cssErrorClass="error">
 										<spring:message code="interface.vlan" />
@@ -148,6 +169,12 @@
 								<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
 								<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" />
 								<br>
+								<form:label for="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+									<spring:message code="interface.ipv6Address" />
+								</form:label>
+								<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
+								<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" />
+								<br>
 								<form:label for="logicalRouterMaster.interfaces[${vs.index}].vlan" path="logicalRouterMaster.interfaces[${vs.index}].vlan" cssErrorClass="error">
 									<spring:message code="interface.vlan" />
 								</form:label>
@@ -182,6 +209,12 @@
 								</form:label>
 								<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}', this, '${msgIPUsed}');" />
 								<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" />
+								<br>
+								<form:label for="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+									<spring:message code="interface.ipv6Address" />
+								</form:label>
+								<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}', this, '${msgIPUsed}');" />
+								<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" />
 								<br>
 								<form:label for="logicalRouterBackup.interfaces[${vs.index}].vlan" path="logicalRouterBackup.interfaces[${vs.index}].vlan" cssErrorClass="error">
 									<spring:message code="interface.vlan" />
@@ -230,6 +263,15 @@
 							<br />		
 							<form:errors path="bgp.clientPrefixes" size="8" />
 						</div>
+						<div class="field">
+							<form:label for="bgp.clientIpv6Prefixes" path="bgp.clientIpv6Prefixes" cssErrorClass="error">
+								<spring:message code="bgp.clientIpv6Prefixes" />
+							</form:label>
+							<br />
+							<form:input path="bgp.clientIpv6Prefixes" size="16" />
+							<br />		
+							<form:errors path="bgp.clientIpv6Prefixes" size="8" />
+						</div>
 						<br>
 						<div>
 							<button id="button1" class="button" disabled="disabled"><spring:message code="buttons.activate"/></button>
@@ -262,13 +304,20 @@
 											<form:errors path="logicalRouterMaster.interfaces[${vs.index}].name" size="8" />
 											<form:input path="logicalRouterMaster.interfaces[${vs.index}].port" size="3" onchange="isInterfaceFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}',  document.getElementById('logicalRouterMaster.interfaces${vs.index}.name'), this, '${msgIfaceUsed}');" />
 											<form:errors path="logicalRouterMaster.interfaces[${vs.index}].port" size="3" />
-
 											<br>
 											<form:label for="logicalRouterMaster.interfaces[${vs.index}].ipAddress" path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" cssErrorClass="error">
 												<spring:message code="interface.ipAddress" />
 											</form:label>
+											<br>
 											<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
 											<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" />
+											<br>
+											<form:label for="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+												<spring:message code="interface.ipv6Address" />
+											</form:label>
+											<br>
+											<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
+											<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" />
 										</div>		
 									</c:when>
 								</c:choose>
@@ -294,13 +343,20 @@
 											<form:errors path="logicalRouterBackup.interfaces[${vs.index}].name" size="8" />
 											<form:input path="logicalRouterBackup.interfaces[${vs.index}].port" size="3" onchange="isInterfaceFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}', document.getElementById('logicalRouterBackup.interfaces${vs.index}.name'), this, '${msgIfaceUsed}');" />
 											<form:errors path="logicalRouterBackup.interfaces[${vs.index}].port" size="3" />
-
 											<br>
 											<form:label for="logicalRouterBackup.interfaces[${vs.index}].ipAddress" path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" cssErrorClass="error">
 												<spring:message code="interface.ipAddress" />
 											</form:label>
+											<br>
 											<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}',  this, '${msgIPUsed}');" />
 											<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" />
+											<br>
+											<form:label for="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+												<spring:message code="interface.ipv6Address" />
+											</form:label>
+											<br>
+											<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}',  this, '${msgIPUsed}');" />
+											<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" />
 										</div>		
 									</c:when>
 								</c:choose>
@@ -337,6 +393,12 @@
 										</form:label>
 										<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
 										<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" />
+										<br>
+										<form:label for="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+											<spring:message code="interface.ipv6Address" />
+										</form:label>
+										<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
+										<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" />
 										<br>
 										<form:label for="logicalRouterMaster.interfaces[${vs.index}].vlan" path="logicalRouterMaster.interfaces[${vs.index}].vlan" cssErrorClass="error">
 											<spring:message code="interface.vlan" />
@@ -375,6 +437,12 @@
 										<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}','${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
 										<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipAddress" size="18" />
 										<br>
+										<form:label for="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+											<spring:message code="interface.ipv6Address" />
+										</form:label>
+										<form:input path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}','${logicalInfrastructure.logicalRouterMaster.physicalRouter.name}', this, '${msgIPUsed}');" />
+										<form:errors path="logicalRouterMaster.interfaces[${vs.index}].ipv6Address" size="18" />
+										<br>
 										<form:label for="logicalRouterMaster.interfaces[${vs.index}].vlan" path="logicalRouterMaster.interfaces[${vs.index}].vlan" cssErrorClass="error">
 											<spring:message code="interface.vlan" />
 										</form:label>
@@ -411,6 +479,12 @@
 										<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}',this, '${msgIPUsed}');" />
 										<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" />
 										<br>
+										<form:label for="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+											<spring:message code="interface.ipv6Address" />
+										</form:label>
+										<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}',this, '${msgIPUsed}');" />
+										<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" />
+										<br>
 										<form:label for="logicalRouterBackup.interfaces[${vs.index}].vlan" path="logicalRouterBackup.interfaces[${vs.index}].vlan" cssErrorClass="error">
 											<spring:message code="interface.vlan" />
 										</form:label>
@@ -446,6 +520,12 @@
 										</form:label>
 										<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}', this, '${msgIPUsed}');" />
 										<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipAddress" size="18" />
+										<br>
+										<form:label for="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" cssErrorClass="error">
+											<spring:message code="interface.ipv6Address" />
+										</form:label>
+										<form:input path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" onchange="isIPFree('${logicalInfrastructure.id}', '${logicalInfrastructure.logicalRouterBackup.physicalRouter.name}', this, '${msgIPUsed}');" />
+										<form:errors path="logicalRouterBackup.interfaces[${vs.index}].ipv6Address" size="18" />
 										<br>
 										<form:label for="logicalRouterBackup.interfaces[${vs.index}].vlan" path="logicalRouterBackup.interfaces[${vs.index}].vlan" cssErrorClass="error">
 											<spring:message code="interface.vlan" />
@@ -604,6 +684,14 @@
 						<br>
 						<form:errors path="vrrp.virtualIPAddress" size="20" />
 						<br>
+						<form:label for="vrrp.virtualIPv6Address" path="vrrp.virtualIPv6Address" cssErrorClass="error_field">
+							<spring:message code="vrrp.virtualIPv6Address" />
+						</form:label>
+						<br />
+						<form:input path="vrrp.virtualIPv6Address" size="20" />
+						<br>
+						<form:errors path="vrrp.virtualIPv6Address" size="20" />
+						<br>
 						<c:if test="${action == 'update'}">
 							<input id="button10" class="button_confirm" type="submit" value="<spring:message code="buttons.change"/>" formaction="updateVRRPIp"/>
 						</c:if>
@@ -633,7 +721,16 @@
 						<form:input path="clientIpRange" size="20" />
 						<br>
 						<form:errors path="clientIpRange" />
-					</div>				
+					</div>
+					<div class="field">
+						<form:label for="clientIpv6Range" path="clientIpv6Range" cssErrorClass="error">
+							<spring:message code="vcpenetwork.clientIpv6Range" />
+						</form:label>
+						<br />
+						<form:input path="clientIpv6Range" size="20" />
+						<br>
+						<form:errors path="clientIpv6Range" />
+					</div>					
 				</div>	
 				<!--  IGP selector -->
 				<div id="client_config" class="ui-widget-content">
@@ -736,4 +833,5 @@
 			<input id="submitButton" class="button" type="submit" value="<spring:message code="buttons.update"/>" />
 		</c:if>
 	</form:form>
+</div>
 </div>

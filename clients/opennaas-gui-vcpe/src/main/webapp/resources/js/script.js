@@ -1296,7 +1296,7 @@ $(document).ready(function() {
 		
 		$('#clientIpRange').rules("add", {custom_regex: validIPAddressSubnetMaskRegExp, required: true });
 		$('#nocIpRange').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
-		$('#vrrp\\.virtualIPAddress').rules("add", { custom_regex: validIPAddressSubnetMaskRegExp, required: true });
+		$('#vrrp\\.virtualIPAddress').rules("add", { custom_regex: validIPAddressRegExp, required: true });
 	
 		// ============ end validation rules ==================== //
 	}
@@ -1405,5 +1405,20 @@ $(document).ready(function () {
 		$('#nocIpRange').popBox();
 		$('#bgp\\.clientPrefixes').popBox();
 		$('#vrrp\\virtualIPAddress').popBox();
+
+		$('#routerCore\\.interfaces3\\.ipv6Address').popBox();
+		$('#routerCore\\.interfaces4\\.ipv6Address').popBox();
+		$('#logicalRouterMaster\\.interfaces0\\.ipv6Address').popBox();
+		$('#logicalRouterBackup\\.interfaces0\\.ipv6Address').popBox();
+		$('#logicalRouterMaster\\.interfaces1\\.ipv6Address').popBox();
+		$('#logicalRouterBackup\\.interfaces1\\.ipv6Address').popBox();
+		$('#logicalRouterMaster\\.interfaces2\\.ipv6Address').popBox();
+		$('#logicalRouterBackup\\.interfaces2\\.ipv6Address').popBox();
+		$('#logicalRouterMaster\\.interfaces3\\.ipv6Address').popBox();
+		$('#logicalRouterBackup\\.interfaces3\\.ipv6Address').popBox();
+		$('#clientIpv6Range').popBox();
+		$('#nocIpv6Range').popBox();
+		$('#bgp\\.clientIpv6Prefixes').popBox();
+		$('#vrrp\\virtualIPv6Address').popBox();
 	}
 });

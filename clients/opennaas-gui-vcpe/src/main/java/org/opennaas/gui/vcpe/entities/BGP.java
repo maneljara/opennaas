@@ -24,6 +24,7 @@ public class BGP {
 	@NotNull
 	@Size(min = 1, message = "{message.error.field.mandatory}")
 	private List<String>	clientPrefixes;
+	private List<String>	clientIpv6Prefixes;
 
 	/**
 	 * @return the clientASNumber
@@ -68,6 +69,21 @@ public class BGP {
 	 */
 	public void setClientPrefixes(List<String> clientPrefixes) {
 		this.clientPrefixes = clientPrefixes;
+	}
+
+	/**
+	 * @return the clientIpv6Prefixes
+	 */
+	public List<String> getClientIpv6Prefixes() {
+		return clientIpv6Prefixes;
+	}
+
+	/**
+	 * @param clientIpv6Prefixes
+	 *            the clientIpv6Prefixes to set
+	 */
+	public void setClientIpv6Prefixes(List<String> clientIpv6Prefixes) {
+		this.clientIpv6Prefixes = clientIpv6Prefixes;
 	}
 
 	/*
