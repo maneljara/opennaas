@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Interface extends VCPENetworkElement {
 
 	private String	ipAddress;
+	private String	ipv6Address;
 	private int		port;
 	private long	vlan;
 
@@ -29,6 +30,21 @@ public class Interface extends VCPENetworkElement {
 	 */
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
+	}
+
+	/**
+	 * @return the ipv6Address
+	 */
+	public String getIpv6Address() {
+		return ipv6Address;
+	}
+
+	/**
+	 * @param ipv6Address
+	 *            the ipv6Address to set
+	 */
+	public void setIpv6Address(String ipv6Address) {
+		this.ipv6Address = ipv6Address;
 	}
 
 	/**

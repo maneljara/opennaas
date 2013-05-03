@@ -425,9 +425,11 @@ public class VCPENetworkModelHelper {
 	 * @param port
 	 * @return iface updated with given parameters
 	 */
-	public static Interface updateInterface(Interface iface, String name, long vlan, String ipAddress, String physicalInterfaceName, int port) {
+	public static Interface updateInterface(Interface iface, String name, long vlan, String ipAddress,
+			String ipv6Address, String physicalInterfaceName, int port) {
 		iface.setName(name);
 		iface.setIpAddress(ipAddress);
+		iface.setIpv6Address(ipv6Address);
 		iface.setVlan(vlan);
 		iface.setPhysicalInterfaceName(physicalInterfaceName);
 		iface.setPort(port);

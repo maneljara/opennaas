@@ -64,8 +64,12 @@ public class OpennaasBeanUtils {
 		modelOut.setTemplateType(modelIn.getTemplateType());
 		// Client IP Range
 		modelOut.setClientIpRange(modelIn.getClientIpRange());
+		// Client IPv6 Range
+		modelOut.setClientIpv6Range(modelIn.getClientIpv6Range());
 		// NOC IP Range
 		modelOut.setNocIpRange(modelIn.getNocIpRange());
+		// NOC IPv6 Range
+		modelOut.setNocIpv6Range(modelIn.getNocIpv6Range());
 		// BGP
 		if (modelIn.getBgp() != null) {
 			modelOut.setBgp(getBGP(modelIn.getBgp()));
@@ -271,6 +275,7 @@ public class OpennaasBeanUtils {
 		// If physical interface name = physicalInterfaceName
 		outIface.setName(inIface.getCompleteName());
 		outIface.setIpAddress(inIface.getIpAddress());
+		outIface.setIpv6Address(inIface.getIpv6Address());
 		outIface.setVlan(inIface.getVlan() != null ? inIface.getVlan() : 0);
 		outIface.setTemplateName(inIface.getTemplateName());
 		outIface.setPhysicalInterfaceName(inIface.getName());
@@ -288,9 +293,16 @@ public class OpennaasBeanUtils {
 		org.opennaas.extensions.vcpe.model.BGP bgpOut = new org.opennaas.extensions.vcpe.model.BGP();
 		bgpOut.setClientASNumber(bgpIn.getClientASNumber());
 		bgpOut.setNocASNumber(bgpIn.getNocASNumber());
-		List<String> clientPrefixes = new ArrayList<String>();
-		clientPrefixes.addAll(bgpIn.getClientPrefixes());
-		bgpOut.setCustomerPrefixes(clientPrefixes);
+		if (bgpIn.getClientPrefixes() != null) {
+			List<String> clientPrefixes = new ArrayList<String>();
+			clientPrefixes.addAll(bgpIn.getClientPrefixes());
+			bgpOut.setCustomerPrefixes(clientPrefixes);
+		}
+		if (bgpIn.getClientIpv6Prefixes() != null) {
+			List<String> clientIPv6Prefixes = new ArrayList<String>();
+			clientIPv6Prefixes.addAll(bgpIn.getClientIpv6Prefixes());
+			bgpOut.setCustomerIPv6Prefixes(clientIPv6Prefixes);
+		}
 		return bgpOut;
 	}
 
@@ -303,6 +315,7 @@ public class OpennaasBeanUtils {
 	private static org.opennaas.extensions.vcpe.model.VRRP getVRRP(VRRP vrrpIn) {
 		org.opennaas.extensions.vcpe.model.VRRP vrrpOut = new org.opennaas.extensions.vcpe.model.VRRP();
 		vrrpOut.setVirtualIPAddress(vrrpIn.getVirtualIPAddress());
+		vrrpOut.setVirtualIPv6Address(vrrpIn.getVirtualIPv6Address());
 		vrrpOut.setPriorityMaster(vrrpIn.getPriorityMaster());
 		vrrpOut.setPriorityBackup(vrrpIn.getPriorityBackup());
 		vrrpOut.setGroup(vrrpIn.getGroup());

@@ -12,6 +12,7 @@ public class VRRP {
 
 	@Pattern(regexp = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$", message = "{message.error.field.format.ip}")
 	private String	virtualIPAddress;
+	private String	virtualIPv6Address;
 	private Integer	group;
 	private Integer	priorityMaster;
 	private Integer	priorityBackup;
@@ -29,6 +30,21 @@ public class VRRP {
 	 */
 	public void setVirtualIPAddress(String virtualIPAddress) {
 		this.virtualIPAddress = virtualIPAddress;
+	}
+
+	/**
+	 * @return the virtualIPv6Address
+	 */
+	public String getVirtualIPv6Address() {
+		return virtualIPv6Address;
+	}
+
+	/**
+	 * @param virtualIPv6Address
+	 *            the virtualIPv6Address to set
+	 */
+	public void setVirtualIPv6Address(String virtualIPv6Address) {
+		this.virtualIPv6Address = virtualIPv6Address;
 	}
 
 	/**
@@ -83,7 +99,7 @@ public class VRRP {
 	 */
 	@Override
 	public String toString() {
-		return "VRRP [virtualIPAddress=" + virtualIPAddress + ", group=" + group + ", priorityMaster=" + priorityMaster + ", priorityBackup=" + priorityBackup + "]";
+		return "VRRP [virtualIPAddress=" + virtualIPAddress + ", virtualIPv6Address=" + virtualIPv6Address + ", group=" + group + ", priorityMaster=" + priorityMaster + ", priorityBackup=" + priorityBackup + "]";
 	}
 
 }

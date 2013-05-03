@@ -19,6 +19,7 @@ public class Interface {
 	private String	port;
 	@Pattern(regexp = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(\\d{1}|[0-2]{1}\\d{1}|3[0-2])$", message = "{message.error.field.format.ipandmask}")
 	private String	ipAddress;
+	private String	ipv6Address;
 	@DecimalMin(value = "0", message = "{message.error.field.format.vlan}")
 	@DecimalMax(value = "4094", message = "{message.error.field.format.vlan}")
 	private Integer	vlan;
@@ -33,7 +34,8 @@ public class Interface {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -47,7 +49,8 @@ public class Interface {
 	}
 
 	/**
-	 * @param port the port to set
+	 * @param port
+	 *            the port to set
 	 */
 	public void setPort(String port) {
 		this.port = port;
@@ -61,10 +64,26 @@ public class Interface {
 	}
 
 	/**
-	 * @param ipAddress the ipAddress to set
+	 * @param ipAddress
+	 *            the ipAddress to set
 	 */
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
+	}
+
+	/**
+	 * @return the ipv6Address
+	 */
+	public String getIpv6Address() {
+		return ipv6Address;
+	}
+
+	/**
+	 * @param ipv6Address
+	 *            the ipv6Address to set
+	 */
+	public void setIpv6Address(String ipv6Address) {
+		this.ipv6Address = ipv6Address;
 	}
 
 	/**
@@ -75,7 +94,8 @@ public class Interface {
 	}
 
 	/**
-	 * @param vlan the vlan to set
+	 * @param vlan
+	 *            the vlan to set
 	 */
 	public void setVlan(Integer vlan) {
 		this.vlan = vlan;
@@ -89,7 +109,8 @@ public class Interface {
 	}
 
 	/**
-	 * @param type the type to set
+	 * @param type
+	 *            the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
@@ -103,7 +124,8 @@ public class Interface {
 	}
 
 	/**
-	 * @param templateName the templateName to set
+	 * @param templateName
+	 *            the templateName to set
 	 */
 	public void setTemplateName(String templateName) {
 		this.templateName = templateName;

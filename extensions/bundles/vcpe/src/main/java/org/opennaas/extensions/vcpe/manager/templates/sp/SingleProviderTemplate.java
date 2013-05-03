@@ -449,10 +449,11 @@ public class SingleProviderTemplate implements ITemplate {
 
 		if (coremasterinput != null) {
 			VCPENetworkModelHelper.updateInterface(coremaster, coremasterinput.getName(), coremasterinput.getVlan(), coremasterinput.getIpAddress(),
+					null,
 					coremasterinput.getPhysicalInterfaceName(), coremasterinput.getPort());
 		}
 		if (corebkpinput != null) {
-			VCPENetworkModelHelper.updateInterface(corebkp, corebkpinput.getName(), corebkpinput.getVlan(), corebkpinput.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(corebkp, corebkpinput.getName(), corebkpinput.getVlan(), corebkpinput.getIpAddress(), null,
 					corebkpinput.getPhysicalInterfaceName(), corebkpinput.getPort());
 		}
 
@@ -478,19 +479,19 @@ public class SingleProviderTemplate implements ITemplate {
 		Interface lo1 = (Interface) VCPENetworkModelHelper.getElementByTemplateName(vcpe1.getInterfaces(), SPTemplateConstants.LO1_INTERFACE);
 
 		if (inter1input != null)
-			VCPENetworkModelHelper.updateInterface(inter1, inter1input.getName(), inter1input.getVlan(), inter1input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(inter1, inter1input.getName(), inter1input.getVlan(), inter1input.getIpAddress(), null,
 					inter1input.getPhysicalInterfaceName(),
 					inter1input.getPort());
 		if (down1input != null)
-			VCPENetworkModelHelper.updateInterface(down1, down1input.getName(), down1input.getVlan(), down1input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(down1, down1input.getName(), down1input.getVlan(), down1input.getIpAddress(), null,
 					down1input.getPhysicalInterfaceName(),
 					down1input.getPort());
 		if (up1input != null)
-			VCPENetworkModelHelper.updateInterface(up1, up1input.getName(), up1input.getVlan(), up1input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(up1, up1input.getName(), up1input.getVlan(), up1input.getIpAddress(), null,
 					up1input.getPhysicalInterfaceName(),
 					up1input.getPort());
 		if (lo1input != null)
-			VCPENetworkModelHelper.updateInterface(lo1, lo1input.getName(), lo1input.getVlan(), lo1input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(lo1, lo1input.getName(), lo1input.getVlan(), lo1input.getIpAddress(), null,
 					lo1input.getPhysicalInterfaceName(),
 					lo1input.getPort());
 
@@ -516,19 +517,19 @@ public class SingleProviderTemplate implements ITemplate {
 		Interface lo2 = (Interface) VCPENetworkModelHelper.getElementByTemplateName(vcpe2.getInterfaces(), SPTemplateConstants.LO2_INTERFACE);
 
 		if (inter2input != null)
-			VCPENetworkModelHelper.updateInterface(inter2, inter2input.getName(), inter2input.getVlan(), inter2input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(inter2, inter2input.getName(), inter2input.getVlan(), inter2input.getIpAddress(), null,
 					inter2input.getPhysicalInterfaceName(),
 					inter2input.getPort());
 		if (down2input != null)
-			VCPENetworkModelHelper.updateInterface(down2, down2input.getName(), down2input.getVlan(), down2input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(down2, down2input.getName(), down2input.getVlan(), down2input.getIpAddress(), null,
 					down2input.getPhysicalInterfaceName(),
 					down2input.getPort());
 		if (up2input != null)
-			VCPENetworkModelHelper.updateInterface(up2, up2input.getName(), up2input.getVlan(), up2input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(up2, up2input.getName(), up2input.getVlan(), up2input.getIpAddress(), null,
 					up2input.getPhysicalInterfaceName(),
 					up2input.getPort());
 		if (lo2input != null)
-			VCPENetworkModelHelper.updateInterface(lo2, lo2input.getName(), lo2input.getVlan(), lo2input.getIpAddress(),
+			VCPENetworkModelHelper.updateInterface(lo2, lo2input.getName(), lo2input.getVlan(), lo2input.getIpAddress(), null,
 					lo2input.getPhysicalInterfaceName(),
 					lo2input.getPort());
 
@@ -541,9 +542,9 @@ public class SingleProviderTemplate implements ITemplate {
 		Interface client1 = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model, SPTemplateConstants.CLIENT1_INTERFACE_AUTOBAHN);
 		Interface client2 = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model, SPTemplateConstants.CLIENT2_INTERFACE_AUTOBAHN);
 
-		VCPENetworkModelHelper.updateInterface(client1, client1input.getName(), client1input.getVlan(), client1input.getIpAddress(),
+		VCPENetworkModelHelper.updateInterface(client1, client1input.getName(), client1input.getVlan(), client1input.getIpAddress(), null,
 				client1input.getPhysicalInterfaceName(), client1input.getPort());
-		VCPENetworkModelHelper.updateInterface(client2, client2input.getName(), client2input.getVlan(), client2input.getIpAddress(),
+		VCPENetworkModelHelper.updateInterface(client2, client2input.getName(), client2input.getVlan(), client2input.getIpAddress(), null,
 				client2input.getPhysicalInterfaceName(), client2input.getPort());
 
 		// Update BoD client phy interfaces from data in logical ones

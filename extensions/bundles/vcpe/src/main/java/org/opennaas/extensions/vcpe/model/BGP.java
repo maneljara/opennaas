@@ -20,7 +20,7 @@ public class BGP {
 	private String			clientASNumber;
 	private String			nocASNumber;
 	private List<String>	customerPrefixes;
-
+	private List<String>	customerIPv6Prefixes;
 	@XmlTransient
 	private ComputerSystem	bgpConfigForMaster;
 	@XmlTransient
@@ -69,6 +69,21 @@ public class BGP {
 	 */
 	public void setCustomerPrefixes(List<String> customerPrefixes) {
 		this.customerPrefixes = customerPrefixes;
+	}
+
+	/**
+	 * @return the customerIPv6Prefixes
+	 */
+	public List<String> getCustomerIPv6Prefixes() {
+		return customerIPv6Prefixes;
+	}
+
+	/**
+	 * @param customerIPv6Prefixes
+	 *            the customerIPv6Prefixes to set
+	 */
+	public void setCustomerIPv6Prefixes(List<String> customerIPv6Prefixes) {
+		this.customerIPv6Prefixes = customerIPv6Prefixes;
 	}
 
 	public ComputerSystem getBgpConfigForMaster() {

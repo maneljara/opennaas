@@ -204,7 +204,7 @@ public class MPTemplateDefaultValuesLoader {
 		return VCPENetworkModelHelper.updateInterface(iface,
 				props.getProperty(propertiesName + ".name").trim() + "." + port,
 				vlan,
-				ipAddress,
+				ipAddress, null,
 				props.getProperty(propertiesName + ".name").trim(),
 				port);
 	}

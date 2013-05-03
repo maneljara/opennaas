@@ -84,7 +84,7 @@ public abstract class VCPENetworkController {
 	protected String create(LogicalInfrastructure logicalInfrastructure, BindingResult result, Model model, Locale locale, HttpSession session) {
 		LOGGER.debug("add entity: " + logicalInfrastructure);
 		try {
-			if (!result.hasErrors() || logicalInfrastructure.getTemplateType().equals("sp_v6_vcpe")) {
+			if (!result.hasErrors()) {
 				String vcpeNetworkId = vcpeNetworkBO.create(logicalInfrastructure);
 				model.addAttribute("logicalInfrastructure", vcpeNetworkBO.getById(vcpeNetworkId));
 				model.addAttribute("infoMsg", messageSource.getMessage("vcpenetwork.create.message.info", null, locale));

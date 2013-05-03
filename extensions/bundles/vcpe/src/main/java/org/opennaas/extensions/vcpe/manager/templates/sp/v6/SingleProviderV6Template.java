@@ -32,11 +32,11 @@ import org.opennaas.extensions.vcpe.model.helper.VCPENetworkModelHelper;
  */
 public class SingleProviderV6Template implements ITemplate {
 
-	private static final String	BGP_TEMPLATE	= "/templates/sp/bgpModel.properties";
+	private static final String		BGP_TEMPLATE	= "/templates/sp/bgpModel.properties";
 
-	private String				templateType	= ITemplate.SP_V6_VCPE_TEMPLATE;
+	private String					templateType	= ITemplate.SP_V6_VCPE_TEMPLATE;
 
-	private Properties			bgpProps;
+	private Properties				bgpProps;
 	private SPV6TemplateSuggestor	suggestor;
 
 	/**
@@ -332,12 +332,14 @@ public class SingleProviderV6Template implements ITemplate {
 				inter2, inter2other);
 
 		// Down links
-		Link linkDown1local = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN1_LINK_LOCAL, SPV6TemplateConstants.LINK_TYPE_ETH, down1,
+		Link linkDown1local = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN1_LINK_LOCAL, SPV6TemplateConstants.LINK_TYPE_ETH,
+				down1,
 				down1other);
 		Link linkDown1other = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN1_LINK_AUTOBAHN,
 				SPV6TemplateConstants.LINK_TYPE_AUTOBAHN, down1other, client1other);
 
-		Link linkDown2local = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN2_LINK_LOCAL, SPV6TemplateConstants.LINK_TYPE_ETH, down2,
+		Link linkDown2local = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN2_LINK_LOCAL, SPV6TemplateConstants.LINK_TYPE_ETH,
+				down2,
 				down2other);
 		Link linkDown2other = VCPENetworkModelHelper.createLink(null, SPV6TemplateConstants.DOWN2_LINK_AUTOBAHN,
 				SPV6TemplateConstants.LINK_TYPE_AUTOBAHN, down2other, client2other);
@@ -449,11 +451,11 @@ public class SingleProviderV6Template implements ITemplate {
 
 		if (coremasterinput != null) {
 			VCPENetworkModelHelper.updateInterface(coremaster, coremasterinput.getName(), coremasterinput.getVlan(), coremasterinput.getIpAddress(),
-					coremasterinput.getPhysicalInterfaceName(), coremasterinput.getPort());
+					coremasterinput.getIpv6Address(), coremasterinput.getPhysicalInterfaceName(), coremasterinput.getPort());
 		}
 		if (corebkpinput != null) {
 			VCPENetworkModelHelper.updateInterface(corebkp, corebkpinput.getName(), corebkpinput.getVlan(), corebkpinput.getIpAddress(),
-					corebkpinput.getPhysicalInterfaceName(), corebkpinput.getPort());
+					corebkpinput.getIpv6Address(), corebkpinput.getPhysicalInterfaceName(), corebkpinput.getPort());
 		}
 
 		// LR1
@@ -479,20 +481,16 @@ public class SingleProviderV6Template implements ITemplate {
 
 		if (inter1input != null)
 			VCPENetworkModelHelper.updateInterface(inter1, inter1input.getName(), inter1input.getVlan(), inter1input.getIpAddress(),
-					inter1input.getPhysicalInterfaceName(),
-					inter1input.getPort());
+					inter1input.getIpv6Address(), inter1input.getPhysicalInterfaceName(), inter1input.getPort());
 		if (down1input != null)
 			VCPENetworkModelHelper.updateInterface(down1, down1input.getName(), down1input.getVlan(), down1input.getIpAddress(),
-					down1input.getPhysicalInterfaceName(),
-					down1input.getPort());
+					down1input.getIpv6Address(), down1input.getPhysicalInterfaceName(), down1input.getPort());
 		if (up1input != null)
 			VCPENetworkModelHelper.updateInterface(up1, up1input.getName(), up1input.getVlan(), up1input.getIpAddress(),
-					up1input.getPhysicalInterfaceName(),
-					up1input.getPort());
+					up1input.getIpv6Address(), up1input.getPhysicalInterfaceName(), up1input.getPort());
 		if (lo1input != null)
 			VCPENetworkModelHelper.updateInterface(lo1, lo1input.getName(), lo1input.getVlan(), lo1input.getIpAddress(),
-					lo1input.getPhysicalInterfaceName(),
-					lo1input.getPort());
+					lo1input.getIpv6Address(), lo1input.getPhysicalInterfaceName(), lo1input.getPort());
 
 		// LR2
 		Router vcpe2input = (Router) VCPENetworkModelHelper.getElementByTemplateName(inputModel, SPV6TemplateConstants.VCPE2_ROUTER);
@@ -517,20 +515,16 @@ public class SingleProviderV6Template implements ITemplate {
 
 		if (inter2input != null)
 			VCPENetworkModelHelper.updateInterface(inter2, inter2input.getName(), inter2input.getVlan(), inter2input.getIpAddress(),
-					inter2input.getPhysicalInterfaceName(),
-					inter2input.getPort());
+					inter2input.getIpv6Address(), inter2input.getPhysicalInterfaceName(), inter2input.getPort());
 		if (down2input != null)
 			VCPENetworkModelHelper.updateInterface(down2, down2input.getName(), down2input.getVlan(), down2input.getIpAddress(),
-					down2input.getPhysicalInterfaceName(),
-					down2input.getPort());
+					down2input.getIpv6Address(), down2input.getPhysicalInterfaceName(), down2input.getPort());
 		if (up2input != null)
 			VCPENetworkModelHelper.updateInterface(up2, up2input.getName(), up2input.getVlan(), up2input.getIpAddress(),
-					up2input.getPhysicalInterfaceName(),
-					up2input.getPort());
+					down2input.getIpv6Address(), up2input.getPhysicalInterfaceName(), up2input.getPort());
 		if (lo2input != null)
 			VCPENetworkModelHelper.updateInterface(lo2, lo2input.getName(), lo2input.getVlan(), lo2input.getIpAddress(),
-					lo2input.getPhysicalInterfaceName(),
-					lo2input.getPort());
+					lo2input.getIpv6Address(), lo2input.getPhysicalInterfaceName(), lo2input.getPort());
 
 		// BOD
 		Interface client1input = (Interface) VCPENetworkModelHelper.getElementByTemplateName(inputModel,
@@ -542,16 +536,18 @@ public class SingleProviderV6Template implements ITemplate {
 		Interface client2 = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model, SPV6TemplateConstants.CLIENT2_INTERFACE_AUTOBAHN);
 
 		VCPENetworkModelHelper.updateInterface(client1, client1input.getName(), client1input.getVlan(), client1input.getIpAddress(),
-				client1input.getPhysicalInterfaceName(), client1input.getPort());
+				client1input.getIpv6Address(), client1input.getPhysicalInterfaceName(), client1input.getPort());
 		VCPENetworkModelHelper.updateInterface(client2, client2input.getName(), client2input.getVlan(), client2input.getIpAddress(),
-				client2input.getPhysicalInterfaceName(), client2input.getPort());
+				client2input.getIpv6Address(), client2input.getPhysicalInterfaceName(), client2input.getPort());
 
 		// Update BoD client phy interfaces from data in logical ones
-		Interface client1phy = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model, SPV6TemplateConstants.CLIENT1_PHY_INTERFACE_AUTOBAHN);
+		Interface client1phy = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model,
+				SPV6TemplateConstants.CLIENT1_PHY_INTERFACE_AUTOBAHN);
 		client1phy.setName(client1input.getPhysicalInterfaceName());
 		client1phy.setPhysicalInterfaceName(client1input.getPhysicalInterfaceName());
 
-		Interface client2phy = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model, SPV6TemplateConstants.CLIENT2_PHY_INTERFACE_AUTOBAHN);
+		Interface client2phy = (Interface) VCPENetworkModelHelper.getElementByTemplateName(model,
+				SPV6TemplateConstants.CLIENT2_PHY_INTERFACE_AUTOBAHN);
 		client2phy.setName(client2input.getPhysicalInterfaceName());
 		client2phy.setPhysicalInterfaceName(client2input.getPhysicalInterfaceName());
 
